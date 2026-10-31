@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "demo": "node demo-agent.js",
+    "demo": "node --env-file=.env demo-agent.js",
     "test": "node test-workflow.js"
   },
   "dependencies": {
