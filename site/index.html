@@ -3,17 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Northstar Coffee | Better mornings</title>
-  <meta name="description" content="A neighborhood coffee shop serving carefully sourced coffee and fresh pastries.">
+  <meta name="theme-color" content="#f7f5ed">
+  <title>Northstar Coffee | A neighborhood cafe in Portland</title>
+  <meta name="description" content="Drop by Northstar Coffee in Portland for carefully sourced coffee, fresh pastries, and a welcoming place to pause.">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header><a href="/">Northstar Coffee</a><nav><a href="/about.html">About</a><a href="/menu.html">Menu</a></nav></header>
-  <main>
-    <h1>Good coffee, close to home</h1>
-    <p>Northstar Coffee is an independent neighborhood cafe in Portland, Oregon. We serve traceable coffee, seasonal pastries, and a welcoming place to pause.</p>
-    <h2>Visit our cafe</h2><p>Find us in the Alberta Arts District, open daily from 7 am to 4 pm.</p>
-    <p><a href="/menu.html">Explore the menu</a></p>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="nav-wrap">
+    <a class="brand" href="/" aria-label="Northstar Coffee home"><span class="brand-mark" aria-hidden="true">N</span>Northstar Coffee</a>
+    <nav class="nav-links" aria-label="Main navigation"><a href="/about.html">Our story</a><a href="/menu.html">Menu</a><a class="nav-cta" href="/about.html#visit">Find us</a></nav>
+  </div></header>
+  <main id="main">
+    <section class="hero"><div class="container hero-grid">
+      <div class="hero-copy"><span class="eyebrow">Your neighborhood coffee stop</span>
+        <h1 class="display">Good coffee,<br>good company.</h1>
+        <p class="lead">A little pause in your day, made with care. Meet us on Alberta for thoughtful coffee, something warm from the oven, and a seat waiting for you.</p>
+        <div class="button-row"><a class="button button-primary" href="/menu.html">Explore the menu <span aria-hidden="true">&nbsp;→</span></a><a class="button button-secondary" href="/about.html#visit">Plan your visit</a></div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Illustration of a fresh cup of coffee beneath the morning sun">
+        <div class="sun"></div><div class="hill hill-back"></div><div class="hill"></div>
+        <div class="cup"><span class="cup-logo">northstar</span></div>
+        <div class="note-card"><strong>Made for slow mornings</strong>Fresh daily · Portland, OR</div>
+        <span class="art-caption">1428 NE Alberta Street</span>
+      </div>
+    </div></section>
+    <section class="section section-paper"><div class="container">
+      <div class="section-heading"><div><span class="eyebrow">A little something for everyone</span><h2>Thoughtful from the first sip</h2></div><p>Good ingredients, kind people, and the sort of neighborhood welcome that makes you want to stay a while.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true">01</span><h3>Carefully sourced</h3><p>We partner with independent growers and roasters who care about every step from origin to cup.</p></article>
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true">02</span><h3>Baked nearby</h3><p>Flaky croissants and seasonal treats arrive fresh from local bakers each morning.</p></article>
+        <article class="feature-card"><span class="feature-icon" aria-hidden="true">03</span><h3>Room to settle in</h3><p>Bring a friend, open a book, or simply enjoy a few unhurried minutes to yourself.</p></article>
+      </div>
+    </div></section>
+    <section class="section"><div class="container"><div class="visit-panel"><div><span class="eyebrow">Come on by</span><h2>Your table is waiting.</h2><p>Open every day, 7 am–4 pm · Alberta Arts District, Portland</p></div><a class="button" href="/about.html#visit">Get the details <span aria-hidden="true">&nbsp;→</span></a></div></div></section>
   </main>
-  <footer>Northstar Coffee · Portland, Oregon</footer>
+  <footer class="site-footer"><div class="container footer-inner"><div class="footer-brand">Northstar Coffee</div><div class="footer-meta">1428 NE Alberta Street · Portland, Oregon 97211<br>Open daily, 7 am–4 pm</div></div></footer>
 </body>
 </html>

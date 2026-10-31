@@ -3,17 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Menu | Northstar Coffee</title>
-  <meta name="description" content="See coffee, tea, and pastry favorites at Northstar Coffee in Portland.">
+  <meta name="theme-color" content="#f7f5ed">
+  <title>Our menu | Coffee and pastries in Portland</title>
+  <meta name="description" content="Explore espresso, coffee, tea, and fresh pastries at Northstar Coffee on Alberta Street in Portland, Oregon.">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Northstar Coffee","address":{"@type":"PostalAddress","streetAddress":"1428 NE Alberta Street","addressLocality":"Portland","addressRegion":"OR","postalCode":"97211","addressCountry":"US"},"openingHours":"Mo-Su 07:00-16:00"}</script>
 </head>
 <body>
-  <header><a href="/">Northstar Coffee</a><nav><a href="/about.html">About</a><a href="/menu.html">Menu</a></nav></header>
-  <main>
-    <h1>Our menu</h1>
-    <p>Here are a few favorites from our Alberta Arts District cafe.</p>
-    <h2>Coffee</h2><ul><li>Drip coffee — $3</li><li>Oat latte — $5</li><li>Espresso — $3.50</li></ul>
-    <h2>From the bakery</h2><ul><li>Butter croissant — $4</li><li>Seasonal scone — $4</li></ul>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="nav-wrap"><a class="brand" href="/" aria-label="Northstar Coffee home"><span class="brand-mark" aria-hidden="true">N</span>Northstar Coffee</a><nav class="nav-links" aria-label="Main navigation"><a href="/about.html">Our story</a><a href="/menu.html" aria-current="page">Menu</a><a class="nav-cta" href="/about.html#visit">Find us</a></nav></div></header>
+  <main id="main">
+    <section class="page-hero"><div class="container page-heading"><span class="eyebrow">Made fresh, served with care</span><h1 class="display">A good little menu.</h1><p class="lead">Find your usual, or try something new. Our coffee is brewed throughout the day, and local bakery favorites arrive fresh each morning.</p></div></section>
+    <section class="section section-paper"><div class="container">
+      <div class="menu-categories">
+        <section class="menu-card" aria-labelledby="coffee-heading"><h2 id="coffee-heading">Coffee bar</h2><p>Carefully sourced, thoughtfully prepared.</p>
+          <div class="menu-item"><div><strong>Drip coffee</strong><br><span>Rotating single origin</span></div><span class="price">$3</span></div>
+          <div class="menu-item"><div><strong>Espresso</strong><br><span>Rich, balanced, and right on its own</span></div><span class="price">$3.50</span></div>
+          <div class="menu-item"><div><strong>Oat latte</strong><br><span>Espresso with creamy oat milk</span></div><span class="price">$5</span></div>
+          <div class="menu-item"><div><strong>Batch brew</strong><br><span>Ask us what’s pouring today</span></div><span class="price">$3.50</span></div>
+        </section>
+        <section class="menu-card" aria-labelledby="bakery-heading"><h2 id="bakery-heading">From the bakery</h2><p>Baked nearby and delivered every morning.</p>
+          <div class="menu-item"><div><strong>Butter croissant</strong><br><span>Golden, flaky, and layered</span></div><span class="price">$4</span></div>
+          <div class="menu-item"><div><strong>Seasonal scone</strong><br><span>A new local fruit each season</span></div><span class="price">$4</span></div>
+          <div class="menu-item"><div><strong>Morning bun</strong><br><span>Cinnamon sugar, soft center</span></div><span class="price">$4.50</span></div>
+          <div class="menu-item"><div><strong>Daily special</strong><br><span>Ask about today’s fresh bake</span></div><span class="price">Market</span></div>
+        </section>
+      </div>
+      <div class="menu-note"><strong>A note on the menu:</strong> We use seasonal ingredients, so a few things may change. Ask our barista about dairy-free options and today’s bakery selection.</div>
+    </div></section>
+    <section class="section"><div class="container faq"><span class="eyebrow">A couple of quick answers</span><h2>Before you stop by</h2>
+      <details><summary>Where is Northstar Coffee?</summary><p>We’re at 1428 NE Alberta Street in Portland, Oregon, in the Alberta Arts District.</p></details>
+      <details><summary>When are you open?</summary><p>Our cafe is open every day from 7 am to 4 pm.</p></details>
+      <details><summary>Do you have non-dairy milk?</summary><p>Yes. We offer oat milk for espresso drinks. Ask the barista about other current options.</p></details>
+    </div></section>
+    <section class="section section-paper"><div class="container"><div class="visit-panel"><div><span class="eyebrow">Coffee tastes better together</span><h2>Come find your favorite.</h2><p>We’re on Alberta every day from 7 am–4 pm.</p></div><a class="button" href="/about.html#visit">Visit Northstar <span aria-hidden="true">&nbsp;→</span></a></div></div></section>
   </main>
-  <footer>Northstar Coffee · Portland, Oregon</footer>
+  <footer class="site-footer"><div class="container footer-inner"><div class="footer-brand">Northstar Coffee</div><div class="footer-meta">1428 NE Alberta Street · Portland, Oregon 97211<br>Open daily, 7 am–4 pm</div></div></footer>
 </body>
 </html>
