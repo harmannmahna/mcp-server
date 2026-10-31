@@ -1,0 +1,16 @@
+{
+  "name": "html-seo-mcp-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "demo": "node demo-agent.js",
+    "test": "node test-workflow.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "express": "^5.3.0",
+    "zod": "^4.6.7"
+  }
+}
