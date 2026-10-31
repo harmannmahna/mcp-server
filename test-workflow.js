@@ -1,28 +1,45 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { inspect } from './audit.js';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
+import { server } from './server.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const pages = ['index.html', 'about.html', 'menu.html'];
-const results = await Promise.all(pages.map(async (page) => inspect(await readFile(path.join(root, 'site', page), 'utf8'), page)));
-assert.equal(results.length, 3);
-assert(results.every((result) => result.findings.length > 0), 'sample pages should have useful opportunities');
-assert(results.some((result) => result.findings.some((finding) => finding.category.includes('AEO'))));
-assert(results.some((result) => result.findings.some((finding) => finding.category.includes('GEO'))));
+const aboutPath = path.join(root, 'site', 'about.html');
+const originalAbout = await readFile(aboutPath, 'utf8');
+const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+const client = new Client({ name: 'workflow-test', version: '1.0.0' });
+try {
+  await server.connect(serverTransport);
+  await client.connect(clientTransport);
+  const tools = await client.listTools();
+  assert.equal(tools.tools.length, 6);
+  const call = async (name, args = {}) => {
+    const result = await client.callTool({ name, arguments: args });
+    assert(!result.isError, result.content?.[0]?.text);
+    return JSON.parse(result.content[0].text);
+  };
+  assert.deepEqual((await call('list_pages')).pages, ['home', 'about', 'menu']);
+  const report = await call('analyze_site');
+  assert.equal(report.pages.length, 3);
+  assert(report.totalFindings > 0);
+  const before = await call('analyze_page', { page: 'about' });
+  const changed = await call('apply_recommendation', { page: 'about', recommendation: 'add-description' });
+  assert(changed.changed);
+  const after = await call('verify_page', { page: 'about' });
+  assert(after.findings.length < before.findings.length);
+  assert(!after.findings.some((finding) => finding.id === 'add-description'));
+  const schemaHtml = originalAbout.replace('</head>', '  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CafeOrCoffeeShop","name":"Northstar Coffee"}</script>\n</head>');
+  await writeFile(aboutPath, schemaHtml, 'utf8');
+  const schemaCheck = await call('verify_page', { page: 'about' });
+  assert.equal(schemaCheck.structuredDataBlocks, 1);
+  assert(!schemaCheck.findings.some((finding) => finding.id === 'add-schema' || finding.id === 'fix-schema'));
+  console.log(`PASS: MCP client listed tools/pages, audited ${report.pages.length} pages (${report.totalFindings} findings), applied a recommendation, and verified description + JSON-LD improvements.`);
+} finally {
+  await writeFile(aboutPath, originalAbout, 'utf8');
+  await client.close().catch(() => {});
+  await server.close().catch(() => {});
+}
 
-const beforeHtml = await readFile(path.join(root, 'site', 'about.html'), 'utf8');
-const before = inspect(beforeHtml, 'about');
-const fix = 'Our story, address, hours, and sourcing at Northstar Coffee in Portland, Oregon.';
-const fixedHtml = beforeHtml.replace('</head>', `  <meta name="description" content="${fix}">\n</head>`);
-const after = inspect(fixedHtml, 'about');
-assert(!after.findings.some((finding) => finding.id === 'add-description'));
-assert(after.findings.length < before.findings.length, 'verified improvement should reduce findings');
-
-const schema = { '@context': 'https://schema.org', '@type': 'CafeOrCoffeeShop', name: 'Northstar Coffee' };
-const schemaHtml = beforeHtml.replace('</head>', `  <script type="application/ld+json">${JSON.stringify(schema)}</script>\n</head>`);
-const schemaAudit = inspect(schemaHtml, 'about');
-assert.equal(schemaAudit.structuredDataBlocks, 1);
-assert(!schemaAudit.findings.some((finding) => finding.id === 'add-schema' || finding.id === 'fix-schema'));
-console.log(`PASS: audited ${results.length} HTML pages for SEO/AEO/GEO; verified description and JSON-LD changes against updated HTML (${before.findings.length} -> ${after.findings.length} about-page findings).`);

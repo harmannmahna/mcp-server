@@ -57,7 +57,10 @@ app.post('/mcp', async (req, res) => {
   catch (error) { if (!res.headersSent) res.status(500).json({ error: error.message }); }
 });
 app.get('/mcp', (_req, res) => res.status(405).send('Use POST for Streamable HTTP MCP requests.'));
-app.listen(port, '127.0.0.1', () => console.log(`MCP server listening on http://127.0.0.1:${port}/mcp`));
 const site = express();
 site.use(express.static(siteDir));
-site.listen(sitePort, '127.0.0.1', () => console.log(`Dummy HTML site: http://127.0.0.1:${sitePort}`));
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  app.listen(port, '127.0.0.1', () => console.log(`MCP server listening on http://127.0.0.1:${port}/mcp`));
+  site.listen(sitePort, '127.0.0.1', () => console.log(`Dummy HTML site: http://127.0.0.1:${sitePort}`));
+}
+export { server };
